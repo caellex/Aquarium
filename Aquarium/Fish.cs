@@ -7,18 +7,31 @@ using System.Threading.Tasks;
 
 namespace Aquarium
 {
+    internal enum Species
+    {
+        Goldfish,
+        Clownfish,
+        Dwarfgurami,
+        HoplisomaPanda,
+        Otto,
+        Cherrybarbe,
+    }
     internal abstract class Fish
     {
-        private string _species;
+        private string _name;
+        private int _age;
+        private Species _species;
 
-        public Fish(string species)
+        public Fish(Species species, string name, int age)
         {
             _species = species;
+            _name = name;
+            _age = age; 
         }
 
-        public abstract string GetName();
-        public abstract int GetAge();
-        public virtual string GetSpecies()
+        public virtual string GetName() {  return _name; }
+        public virtual int GetAge() { return _age; }
+        public virtual Species GetSpecies()
         {
             return _species;
         }

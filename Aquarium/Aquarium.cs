@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Aquarium
 {
@@ -13,28 +12,28 @@ namespace Aquarium
 
         public void VisitAquarium()
         {
-            Console.Clear();
             InitializeFish();
 
             PeekInside();
-            
+
+
         }
         private void InitializeFish()
         {
-            if(allFishInTank.Count <= 0)
+            if (allFishInTank.Count <= 0)
             {
-                allFishInTank.Add(new Goldfish("Goldfish","Kåre",2));
-                allFishInTank.Add(new Dwarfgurami("Dwarfgurami", "Mons",10));
-                allFishInTank.Add(new Cherrybarbe("Cherrybarbe", "Kjetil",5));
-                allFishInTank.Add(new Goldfish("Goldfish","Jens",4));
-                allFishInTank.Add(new Otto("Otto", "Svein-Kjetil Andrè",8));
-                allFishInTank.Add(new Clownfish("Clownfish", "Kari",1));
-                allFishInTank.Add(new Dwarfgurami("Dwarfgurami", "Fisk",3));
-                allFishInTank.Add(new Cherrybarbe("Cherrybarbe","Anne",1));
-                allFishInTank.Add(new Panda_pansermalle("Hoplisoma Panda", "Bob",6));
-                allFishInTank.Add(new Otto("Otto", "Jens-Arne",0));
-                allFishInTank.Add(new Clownfish("Clownfish", "Nora",11));
-                allFishInTank.Add(new Panda_pansermalle("Hoplisoma Panda", "Carl",7));
+                allFishInTank.Add(new Coldwater(18, 24, Species.Goldfish, "Kåre", 2));
+                allFishInTank.Add(new Warmwater(25, 28, Species.Dwarfgurami, "Mons", 10));
+                allFishInTank.Add(new Warmwater(23, 26, Species.Cherrybarbe, "Kjetil", 5));
+                allFishInTank.Add(new Coldwater(18, 24, Species.Goldfish, "Jens", 4));
+                allFishInTank.Add(new Warmwater(22, 26, Species.Otto, "Svein-Kjetil Andrè", 8));
+                allFishInTank.Add(new Warmwater(23, 26, Species.Clownfish, "Kari", 1));
+                allFishInTank.Add(new Warmwater(25, 28, Species.Dwarfgurami, "Fisk", 3));
+                allFishInTank.Add(new Warmwater(23, 26, Species.Cherrybarbe, "Anne", 1));
+                allFishInTank.Add(new Warmwater(24, 28, Species.HoplisomaPanda, "Bob", 6));
+                allFishInTank.Add(new Warmwater(22, 26, Species.Otto, "Jens-Arne", 0));
+                allFishInTank.Add(new Warmwater(23, 26, Species.Clownfish, "Nora", 11));
+                allFishInTank.Add(new Warmwater(24, 28, Species.HoplisomaPanda, "Carl", 7));
             }
         }
 
@@ -42,12 +41,11 @@ namespace Aquarium
         {
             while (true)
             {
-                Console.Clear();
                 SwimLogic();
                 Console.WriteLine("\nIf you would like to look closer at a fish, type in it's name. If not, press X to exit.");
                 string FishToFind = Console.ReadLine();
 
-                if (FishToFind.ToUpper().Equals("X") )
+                if (FishToFind.ToUpper().Equals("X"))
                 {
                     return;
                 }
@@ -62,6 +60,7 @@ namespace Aquarium
             Random rand = new Random();
             var interval = rand.Next(200, 800);
             Console.ForegroundColor = ConsoleColor.Green;
+            Console.Clear();
             foreach (Fish fish in allFishInTank)
             {
                 Console.WriteLine($"The {fish.GetSpecies()} {fish.GetName()} is swimming around, blob blob.");
@@ -78,14 +77,14 @@ namespace Aquarium
             if (foundFish != null)
             {
                 foundFish.LookCloserAtFish();
-                Thread.Sleep(2000);
+                Thread.Sleep(4000);
             }
             else
-            { 
-                Console.ForegroundColor= ConsoleColor.Red;
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"'{FishToFind}' is not an existing fish in this tank.");
                 Console.ResetColor();
-                Thread.Sleep(2500);
+                Thread.Sleep(3000);
             }
         }
     }
